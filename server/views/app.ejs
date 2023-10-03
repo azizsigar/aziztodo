@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Roboto+Mono:wght@500&display=swap');
+
+    * {
+        font-family: Cute Font;
+        font-size: x-large;
+        line-break: auto;
+    }
+
+    .task {
+        border: 2px solid black;
+        box-shadow: 2px 2px black;
+        margin: auto;
+        margin: 5px;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+
+    }
+    .task form{
+        margin: auto;
+        margin: 5px;
+    }
+
+    .add-todo {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        margin: auto;
+        width: 90%;
+        flex-wrap: nowrap;
+    }
+    .hea-of-task{
+        align-items: center;
+        text-align: center;
+    }
+
+    button {
+        background-color: rgb(139, 211, 32);
+        border: 1px solid black;
+    }
+
+    input {
+        outline: 2px black solid;
+        background-color: bisque;
+        width: 9rem;
+    }
+    .add-form button{
+        margin: auto;
+        padding: 5px;
+        display: flex;
+        width: auto;
+        margin-bottom: 5px;
+    }
+    .add-form input{
+        margin: auto;
+        margin-bottom: 5px;
+        margin: 30px;
+    }
+    .add-form{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        border: 1px solid black;
+        box-shadow: 2px 2px black;
+        margin-bottom: 5px;
+       
+    }
+    .add-more{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+</style>
+
+<body>
+    <a href="/info.html">who we are</a>
+    <div class="add-todo">
+            <h1>Azizs to do list app</h1>
+            <div class="add-form">
+
+                <form method="post" action="submit-new-post">
+                    <input type="text" name="title" placeholder="title">
+                    <input type="text" name="desc" placeholder="description">
+                    
+
+                        <button>➕</button>
+                    
+                    
+                </form>
+            </div>
+    </div>
+    <% if(post.length> 0) { %>
+        <% post.forEach(post=> { %>
+            <div class="task">
+                <div class="hea-of-task">
+                    <a href="/delete-post/<%= post._id %>">❌</a>
+                    <h2>
+                        <%= post.title %>
+                    </h2>
+                    <p>
+                        <%= post.desc %>
+                    </p>
+                </div>
+                <!-- <p><%= post.detail %></p> -->
+                <div>
+                    <div class="add-more">
+
+
+                        <form method="post" action="/add-detail/<%= post._id %>">
+                            <input type="text" name="detail" placeholder="add more">
+                            <button> ➕</button>
+                        </form>
+                    </div>
+                    <div>
+                        <% if(post.details.length> 0) { %>
+                            <% post.details.forEach(detail=> { %>
+                                <div>
+                                    <ul>
+                                        <li>
+
+                                            <h6>
+                                                <%= detail.detail %>
+                                            </h6>
+                                            <button>
+                                                <a href="/delete-detail/<%= detail._id %>">✅</a>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <% }) %>
+                                    <% } %>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+                <% } else { %>
+                    <p>no post here</p>
+                    <% } %>
+</body>
+
+</html>
